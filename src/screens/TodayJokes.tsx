@@ -11,18 +11,15 @@ const TodayJokesScreen = () => {
 
   const jokesHistory = useSelector((state: AppState) => state.jokes.jokesHistory);
   const lastFetchData = useSelector((state: AppState) => state.jokes.lastFetchData);
-  const joke = jokesHistory[0];
+  const joke = jokesHistory[jokesHistory.length - 1];
 
   useEffect(() => {
-    if (lastFetchData) {
-      if (isNewDay(lastFetchData)) {
-        dispatch(fetchJoke());
-      }
-    } else {
-      dispatch(fetchJoke());
-    }
+    const currentTime = new Date().getTime();
 
-    dispatch(setLastFetchData(new Date()));
+    if (!lastFetchData || isNewDay(lastFetchData)) {
+      dispatch(fetchJoke());
+      dispatch(setLastFetchData(currentTime));
+    }
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 

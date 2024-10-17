@@ -18,10 +18,7 @@ const jokesSlice = createSlice({
         joke.liked = !joke.liked;
       }
     },
-    addJokeToHistory(state, action: PayloadAction<Joke>) {
-      state.jokesHistory.push(action.payload);
-    },
-    setLastFetchData(state, action: PayloadAction<Date>) {
+    setLastFetchData(state, action: PayloadAction<number>) {
       state.lastFetchData = action.payload;
     },
   },
@@ -32,5 +29,5 @@ const jokesSlice = createSlice({
   },
 });
 
-export const { likeJoke, addJokeToHistory, setLastFetchData } = jokesSlice.actions;
+export const { likeJoke, setLastFetchData } = jokesSlice.actions;
 export const jokesReducer = jokesSlice.reducer;

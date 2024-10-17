@@ -1,26 +1,21 @@
-const TodayJokesScreen = () => {
-  const dispatch = useDispatch();
-  
-  // Получаем шутки из состояния Redux
-  const jokesHistory = useSelector((state) => state.jokes.jokesHistory);
-  const joke = jokesHistory[0]; // Используем первую шутку в массиве
+import React from 'react';
+import { View, Text } from 'react-native';
+import { useSelector } from 'react-redux';
+import { AppState } from '../store/store';
 
-  useEffect(() => {
-    // Фетчим шутку при монтировании компонента
-    dispatch(fetchJoke());
-  }, [dispatch]);
+const JokesHistoryScreen = () => {
+  const jokesHistory = useSelector((state: AppState) => state.jokes.jokesHistory);
 
   return (
     <View>
-      <Text>Today's Jokes</Text>
-      {joke ? (
-        <Text>{joke.title}</Text> // Отображаем шутку
-      ) : (
-        <Text>Loading...</Text> // Показываем индикатор загрузки, пока шутка не будет загружена
+      <Text>Jokes History</Text>
+      {!!jokesHistory.length ? jokesHistory.map(joke => (
+        <Text key={joke.id}>{joke.title}</Text>
+      )) : (
+        <Text>No jokes found.</Text>
       )}
-      <Button title="Fetch Another Joke" onPress={() => dispatch(fetchJoke())} />
     </View>
   );
 };
 
-export default TodayJokesScreen;
+export default JokesHistoryScreen;

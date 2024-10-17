@@ -1,5 +1,5 @@
-export default function isNewDay(date: Date) {
-  const lastDate = new Date(date);
+export default function isNewDay(dateTime: number) {
+  const lastDate = new Date(dateTime);
   const currentDate = new Date();
 
   lastDate.setHours(0, 0, 0, 0);

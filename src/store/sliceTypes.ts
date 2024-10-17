@@ -6,5 +6,5 @@ export interface Joke {
 
 export interface JokesState {
   jokesHistory: Joke[];
-  lastFetchData: Date | null;
+  lastFetchData: number | null;
 }

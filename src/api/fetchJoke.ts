@@ -7,6 +7,7 @@ export const fetchJoke = createAsyncThunk('jokes/fetchJoke', async () => {
   const response = await fetch(API_URL);
   const data = await response.json();
   let title = '';
+
   if (!data.error) {
     if (data.setup && data.delivery) {
       title = `${data.setup} ${data.delivery}`;
