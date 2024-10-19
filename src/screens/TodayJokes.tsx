@@ -1,5 +1,5 @@
 import React, {useEffect} from 'react';
-import {StyleSheet, Text, View} from 'react-native';
+import {ActivityIndicator, StyleSheet, Text, View} from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
 import {fetchJoke} from '../api/fetchJoke';
 import ButtonLike from '../components/ButtonLike';
@@ -19,7 +19,7 @@ const TodayJokesScreen = () => {
     (state: AppState) => state.jokes.lastFetchData,
   );
   const joke = jokesHistory[0];
-  const {title, id, liked} = joke;
+  const {title, id, liked} = joke ?? {};
 
   useEffect(() => {
     const currentTime = new Date().getTime();
@@ -37,7 +37,7 @@ const TodayJokesScreen = () => {
         {joke ? (
           <Text style={styles.title}>{title}</Text>
         ) : (
-          <Text>Loading...</Text>
+          <ActivityIndicator size={'large'} />
         )}
         <View style={styles.actionsContainer}>
           <ButtonLike
@@ -45,7 +45,7 @@ const TodayJokesScreen = () => {
             liked={liked}
             onPress={() => dispatch(likeJoke(id))}
           />
-          <ButtonShare joke={joke.title} />
+          <ButtonShare joke={title} />
         </View>
       </View>
     </MainScreenWrapper>
