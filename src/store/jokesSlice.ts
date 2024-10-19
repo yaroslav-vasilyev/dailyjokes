@@ -24,7 +24,7 @@ const jokesSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder.addCase(fetchJoke.fulfilled, (state, action: PayloadAction<Joke>) => {
-      state.jokesHistory.push(action.payload);
+      state.jokesHistory.unshift(action.payload);
     });
   },
 });
